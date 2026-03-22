@@ -1,4 +1,4 @@
-import { Github, Globe, BookOpenText, CircleDot } from 'lucide-react'
+import { Github, Globe, BookOpenText } from 'lucide-react'
 
 export function AppFooter() {
   return (
