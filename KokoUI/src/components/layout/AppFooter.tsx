@@ -18,7 +18,7 @@ export function AppFooter() {
         </div>
 
         <div className="grid grid-cols-1 gap-2 text-sm text-[#4B2E2B] dark:text-[#ECB176]">
-          <a href="https://github.com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-[#4B2E2B] dark:hover:text-[#FED8B1]">
+          <a href="https://github.com/abundancee/Koko-Faucet" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-[#4B2E2B] dark:hover:text-[#FED8B1]">
             <Github className="h-4 w-4" /> GitHub
           </a>
           <a href="https://docs.ethers.org" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-[#4B2E2B] dark:hover:text-[#FED8B1]">
