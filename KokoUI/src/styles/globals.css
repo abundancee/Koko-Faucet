@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+:root {
+  color-scheme: dark;
+  --app-bg: #1b140f;
+  --app-bg-muted: #2a1d15;
+  --text-primary: #f8e8d6;
+  --text-secondary: #e3c8ad;
+  --surface: rgba(60, 42, 30, 0.76);
+  --surface-strong: #3f2b1e;
+  --border-soft: rgba(236, 177, 118, 0.28);
+  --shadow-soft: 0 16px 46px rgba(8, 5, 3, 0.48);
+  --brand-primary: #ecb176;
+  --brand-secondary: #fed8b1;
+  --brand-accent: #a67b5b;
+  --brand-soft: rgba(236, 177, 118, 0.12);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text-primary);
+  font-family: 'Space Grotesk', 'Avenir Next', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 220ms ease, color 220ms ease;
+  background-color: var(--app-bg);
+  background-image:
+    radial-gradient(circle at 0% 0%, rgba(236, 177, 118, 0.2), transparent 35%),
+    radial-gradient(circle at 100% 0%, rgba(166, 123, 91, 0.14), transparent 42%),
+    linear-gradient(180deg, var(--app-bg) 0%, var(--app-bg-muted) 100%);
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Orbitron', 'Space Grotesk', sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.glass-card {
+  border: 1px solid var(--border-soft);
+  background: var(--surface);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-soft);
+  transition: border-color 220ms ease, background-color 220ms ease;
+}
+
+.input-base {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-strong);
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 220ms ease;
+}
+
+.input-base::placeholder {
+  color: var(--text-secondary);
+}
+
+.input-base:focus {
+  border-color: rgba(166, 123, 91, 0.7);
+}
+
+.text-muted {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.countdown-pill {
+  min-width: 2.3rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-strong);
+  padding: 0.2rem 0.45rem;
+  text-align: center;
+}
