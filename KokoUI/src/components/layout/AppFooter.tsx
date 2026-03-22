@@ -5,7 +5,10 @@ export function AppFooter() {
     <footer className="mt-10 rounded-3xl border border-[#6F4E37]/45 bg-[#FFF7EF] px-6 py-8 shadow-sm dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="text-lg font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">Koko Faucet</p>
+          <div className="flex items-center gap-2">
+            <img src="/koko-logo.svg" alt="Koko logo" className="h-8 w-8 rounded-lg border border-[#6F4E37]/25 object-cover" />
+            <p className="text-lg font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">Koko Faucet</p>
+          </div>
           <p className="mt-2 max-w-md text-sm text-[#4B2E2B] dark:text-[#ECB176]">
             Production-inspired ERC20 faucet experience for developers.
           </p>
