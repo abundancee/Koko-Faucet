@@ -5,6 +5,9 @@ export interface RecentTransaction {
   amount: string
   timestamp: number
   hash: string
+  type?: 'claim' | 'mint' | 'transfer'
+  from?: string
+  to?: string
 }
 
 export interface FaucetStats {

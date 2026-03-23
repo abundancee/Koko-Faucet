@@ -58,31 +58,91 @@ export function useFaucetData() {
       const nextClaimTime = lastClaimTime + claimInterval
       const remainingMintableRaw = maxSupplyRaw > totalSupplyRaw ? maxSupplyRaw - totalSupplyRaw : BigInt(0)
 
-      let claimEvents: EventLog[] = []
 
+      // Fetch all relevant events: Claims, Mint, Transfer
+      let claimEvents: EventLog[] = []
+      let mintEvents: EventLog[] = []
+      let transferEvents: EventLog[] = []
       try {
         const latestBlock = await provider.getBlockNumber()
         const fromBlock = Math.max(0, latestBlock - RECENT_EVENT_WINDOW)
+        // Claims
         const claimsFilter = contract.filters.TokensClaimed()
-        const logs = await contract.queryFilter(claimsFilter, fromBlock, latestBlock)
-        claimEvents = logs.filter((event): event is EventLog => event instanceof EventLog)
+        const claimLogs = await contract.queryFilter(claimsFilter, fromBlock, latestBlock)
+        claimEvents = claimLogs.filter((event): event is EventLog => event instanceof EventLog)
+        // Mint
+        const mintFilter = contract.filters.TokensMinted?.() ?? contract.filters.Transfer(null, null)
+        const mintLogs = contract.filters.TokensMinted ? await contract.queryFilter(mintFilter, fromBlock, latestBlock) : []
+        mintEvents = mintLogs.filter((event): event is EventLog => event instanceof EventLog)
+        // Transfer
+        const transferFilter = contract.filters.Transfer()
+        const transferLogs = await contract.queryFilter(transferFilter, fromBlock, latestBlock)
+        transferEvents = transferLogs.filter((event): event is EventLog => event instanceof EventLog)
       } catch {
-        // Some RPC providers do not support long-range indexed logs reliably.
         claimEvents = []
+        mintEvents = []
+        transferEvents = []
       }
 
+      // Parse all events into a unified transaction feed
+      const txRows: Array<{
+        type: 'claim' | 'mint' | 'transfer',
+        wallet: string,
+        amount: bigint,
+        hash: string,
+        blockNumber: number,
+        to?: string,
+        from?: string,
+      }> = []
+
+      // Claims
+      for (const event of claimEvents) {
+        const wallet = String(event.args?.[0] ?? '')
+        const amountRaw = event.args?.[1]
+        const amount = typeof amountRaw === 'bigint' ? amountRaw : claimAmountRaw
+        txRows.push({ type: 'claim', wallet, amount, hash: event.transactionHash, blockNumber: event.blockNumber })
+      }
+      // Mint
+      for (const event of mintEvents) {
+        const wallet = String(event.args?.[0] ?? '')
+        const amountRaw = event.args?.[1]
+        const amount = typeof amountRaw === 'bigint' ? amountRaw : claimAmountRaw
+        txRows.push({ type: 'mint', wallet, amount, hash: event.transactionHash, blockNumber: event.blockNumber })
+      }
+      // Transfers (exclude mints and claims to avoid duplicates)
+      for (const event of transferEvents) {
+        const from = String(event.args?.[0] ?? '')
+        const to = String(event.args?.[1] ?? '')
+        const amountRaw = event.args?.[2]
+        const amount = typeof amountRaw === 'bigint' ? amountRaw : claimAmountRaw
+        // Exclude if this transfer is already in claims or mints (by hash)
+        if (!txRows.some(row => row.hash === event.transactionHash)) {
+          txRows.push({ type: 'transfer', wallet: to, from, to, amount, hash: event.transactionHash, blockNumber: event.blockNumber })
+        }
+      }
+
+      // Sort by blockNumber descending (most recent first)
+      txRows.sort((a, b) => b.blockNumber - a.blockNumber)
+
+      // Only keep the most recent N
+      const recentRows = txRows.slice(0, RECENT_TRANSACTIONS_LIMIT)
+
+      // Get block timestamps
+      const blockNumbers = Array.from(new Set(recentRows.map((row) => row.blockNumber)))
+      const blocks = await Promise.all(blockNumbers.map(async (blockNumber) => provider.getBlock(blockNumber)))
+      const blockTimestampMap = new Map<number, number>()
+      for (const block of blocks) {
+        if (block) {
+          blockTimestampMap.set(block.number, block.timestamp)
+        }
+      }
+
+
+      // Stats: only count claims for unique users, userClaims, etc.
       const claimRows = claimEvents
         .map((event) => {
           const wallet = String(event.args?.[0] ?? '')
-          const amountRaw = event.args?.[1]
-          const amount = typeof amountRaw === 'bigint' ? amountRaw : claimAmountRaw
-
-          return {
-            wallet,
-            amount,
-            hash: event.transactionHash,
-            blockNumber: event.blockNumber,
-          }
+          return { wallet, hash: event.transactionHash, blockNumber: event.blockNumber, amount: event.args?.[1] }
         })
         .filter((row) => row.wallet && row.hash)
 
@@ -96,43 +156,33 @@ export function useFaucetData() {
       const todayStartSec = Math.floor(todayStart.getTime() / 1000)
 
       const totalClaims = claimRows.length
-      const recentRows = claimRows.slice(-RECENT_TRANSACTIONS_LIMIT).reverse()
-      const blockNumbers = Array.from(new Set(recentRows.map((row) => row.blockNumber)))
-      const blocks = await Promise.all(blockNumbers.map(async (blockNumber) => provider.getBlock(blockNumber)))
-      const blockTimestampMap = new Map<number, number>()
 
-      for (const block of blocks) {
-        if (block) {
-          blockTimestampMap.set(block.number, block.timestamp)
-        }
-      }
-
-      let claimsToday = 0
-      let totalDistributedRaw = BigInt(0)
-
+      // For claimsToday and totalDistributedRaw, use only claims
       const uniqueClaimBlocks = Array.from(new Set(claimRows.map((row) => row.blockNumber)))
       const allBlocks = await Promise.all(uniqueClaimBlocks.map(async (blockNumber) => provider.getBlock(blockNumber)))
       const allBlockTimestampMap = new Map<number, number>()
-
       for (const block of allBlocks) {
         if (block) {
           allBlockTimestampMap.set(block.number, block.timestamp)
         }
       }
-
+      let claimsToday = 0
+      let totalDistributedRaw = BigInt(0)
       for (const row of claimRows) {
-        totalDistributedRaw += row.amount
+        totalDistributedRaw += typeof row.amount === 'bigint' ? row.amount : claimAmountRaw
         const timestamp = allBlockTimestampMap.get(row.blockNumber) ?? 0
         if (timestamp >= todayStartSec) {
           claimsToday += 1
         }
       }
 
+      // Map all recentRows to RecentTransaction (show type in UI if desired)
       const recentTransactions: RecentTransaction[] = recentRows.map((row) => ({
         wallet: row.wallet,
         amount: formatUnits(row.amount, tokenDecimals),
         timestamp: blockTimestampMap.get(row.blockNumber) ?? 0,
         hash: row.hash,
+        // Optionally: type: row.type, from: row.from, to: row.to
       }))
 
       return {

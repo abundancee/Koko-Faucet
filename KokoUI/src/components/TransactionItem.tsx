@@ -22,6 +22,11 @@ export function TransactionItem({ item, explorerBaseUrl, tokenSymbol }: Transact
         <div className="flex items-center gap-2">
           <p className="text-sm font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">{shortenAddress(item.wallet)}</p>
           <CopyButton value={item.wallet} />
+          {item.type && (
+            <span className="ml-2 rounded bg-[#fed8b1]/60 px-2 py-0.5 text-xs font-bold uppercase text-[#6F4E37] dark:bg-[#6F4E37]/60 dark:text-[#FED8B1]">
+              {item.type}
+            </span>
+          )}
         </div>
         <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">{formatRelativeTime(item.timestamp)}</p>
       </div>
