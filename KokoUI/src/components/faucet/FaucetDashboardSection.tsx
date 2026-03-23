@@ -141,7 +141,7 @@ export function FaucetDashboardSection({
                 <p className="mt-1 text-lg font-semibold text-primary">{faucetData?.totalSupplyFormatted ?? '--'} {faucetData?.tokenSymbol ?? ''}</p>
               </div>
               <div className="rounded-2xl border border-muted bg-card text-card-foreground px-4 py-3">
-                <p className="text-xs text-secondary">Claimed Amount</p>
+                <p className="text-xs text-secondary">Claim Amount</p>
                 <p className="mt-1 text-lg font-semibold text-primary">{faucetData?.claimAmountFormatted ?? '--'} {faucetData?.tokenSymbol ?? ''}</p>
               </div>
               <div className="rounded-2xl border border-muted bg-card text-card-foreground px-4 py-3">
