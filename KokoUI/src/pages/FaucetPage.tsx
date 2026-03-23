@@ -5,7 +5,6 @@ import toast from 'react-hot-toast'
 import { useAccount, useChainId, useSwitchChain } from 'wagmi'
 import { FaucetDashboardSection } from '../components/faucet/FaucetDashboardSection'
 import { AppFooter } from '../components/layout/AppFooter'
-import { DashboardPreviewSection } from '../components/layout/DashboardPreviewSection'
 import { HeroSection } from '../components/layout/HeroSection'
 import { TopNavbar } from '../components/layout/TopNavbar'
 import { useCountdown } from '../hooks/useCountdown'
@@ -258,7 +257,6 @@ export function FaucetPage() {
 			/>
 
 			<HeroSection onClaimClick={handleClaimScroll} faucetData={faucetData} />
-			<DashboardPreviewSection faucetData={faucetData} isConnected={isConnected} />
 
 			<FaucetDashboardSection
 				faucetData={faucetData}

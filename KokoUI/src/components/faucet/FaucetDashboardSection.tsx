@@ -96,9 +96,9 @@ export function FaucetDashboardSection({
           decimals: 2,
         },
         {
-          title: 'Faucet Balance',
-          value: Number.parseFloat(faucetData.stats.faucetBalance || '0'),
-          subtitle: 'Remaining reserve',
+          title: 'Total Supply',
+          value: Number.parseFloat(faucetData.totalSupplyFormatted || '0'),
+          subtitle: 'Current token supply',
           icon: Database,
           suffix: ` ${faucetData.tokenSymbol}`,
           decimals: 2,
@@ -137,8 +137,8 @@ export function FaucetDashboardSection({
 
             <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
               <div className="rounded-2xl border border-[#6F4E37]/45 bg-[#FFF7EF] px-4 py-3 dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]">
-                <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">Faucet Balance</p>
-                <p className="mt-1 text-lg font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">{faucetData?.faucetBalanceFormatted ?? '--'} {faucetData?.tokenSymbol ?? ''}</p>
+                <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">Total Supply</p>
+                <p className="mt-1 text-lg font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">{faucetData?.totalSupplyFormatted ?? '--'} {faucetData?.tokenSymbol ?? ''}</p>
               </div>
               <div className="rounded-2xl border border-[#6F4E37]/45 bg-[#FFF7EF] px-4 py-3 dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]">
                 <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">Claim Amount</p>

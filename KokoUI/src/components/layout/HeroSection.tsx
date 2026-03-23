@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Zap } from 'lucide-react'
-import { Button } from '../Button'
+import { Button } from '../Button.tsx'
 import { WalletConnectButton } from '../WalletConnectButton'
 import type { FaucetData } from '../../types/faucet'
 
@@ -46,7 +46,7 @@ export function HeroSection({ onClaimClick, faucetData }: HeroSectionProps) {
           className="rounded-3xl border border-[#6F4E37]/45 bg-[#FFF7EF] p-5 shadow-lg dark:border-[#ECB176]/40 dark:bg-[#2A1D15]"
         >
           <div className="mb-4 flex items-center justify-between">
-            <p className="text-sm font-medium text-[#4B2E2B] dark:text-[#FED8B1]">Dashboard Preview</p>
+            <p className="text-sm font-medium text-[#4B2E2B] dark:text-[#FED8B1]">Dashboard Snapshot</p>
             <span className="rounded-full bg-[#FED8B1]/70 px-2 py-0.5 text-xs font-medium text-[#4B2E2B] dark:bg-[#A67B5B]/35 dark:text-[#FED8B1]">
               Live
             </span>
