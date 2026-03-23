@@ -300,20 +300,18 @@ export function FaucetDashboardSection({
 
       <section className="mt-6">
         <Card>
-
-          
-          <div className="mb-3 flex items-center justify-between">
-            <h3 className="text-xl font-semibold font-semibold text-primary">Recent Transactions</h3>
-            <p className="text-sm tfont-semibold text-primary">Live feed</p>
+          <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <h3 className="text-xl font-semibold text-primary">Recent Transactions</h3>
+            <p className="text-sm font-semibold text-primary">Live feed</p>
           </div>
           {isLoading ? (
-            <div className="space-y-3">
+            <div className="flex flex-col gap-3">
               <Skeleton className="h-20" />
               <Skeleton className="h-20" />
               <Skeleton className="h-20" />
             </div>
           ) : faucetData?.recentTransactions.length ? (
-            <div className="space-y-3">
+            <div className="flex flex-col gap-3">
               {faucetData.recentTransactions.map((item) => (
                 <TransactionItem key={item.hash} item={item} explorerBaseUrl={faucetData.explorerBaseUrl} tokenSymbol={faucetData.tokenSymbol} />
               ))}
