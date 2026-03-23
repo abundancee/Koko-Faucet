@@ -22,13 +22,13 @@ export function HeroSection({ onClaimClick, faucetData }: HeroSectionProps) {
           transition={{ duration: 0.35 }}
         >
           <span className="inline-flex items-center gap-1 rounded-full border border-brand-accent/50 bg-brand-secondary/45 px-3 py-1 text-xs font-medium text-brand-accent dark:border-brand-primary/45 dark:bg-brand-accent/50 dark:text-brand-secondary">
-            <Zap className="h-3.5 w-3.5" /> Live on-chain claims
+            <Zap className="h-3.5 w-3.5" /> 
           </span>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-primary sm:text-5xl">
-            Get Test Tokens Instantly
+            Claim KO Instantly
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-secondary">
-            A production-style ERC20 faucet for developers and QA teams. Connect your wallet, claim in one click, and track transparent token distribution in real time.
+            Connect your wallet, claim in one click, and track transparent token distribution in real time.
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <WalletConnectButton />
