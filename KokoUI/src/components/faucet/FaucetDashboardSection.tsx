@@ -151,7 +151,7 @@ export function FaucetDashboardSection({
             </div>
 
             <form onSubmit={onClaim} className="mt-5 space-y-3">
-              <Button type="submit" fullWidth variant="primary" isLoading={status === 'pending'} disabled={Boolean(claimDisabledReason)}>
+              <Button type="submit" fullWidth variant="soft" isLoading={status === 'pending'} disabled={Boolean(claimDisabledReason)}>
                 {status === 'pending' ? 'Claiming...' : 'Claim Tokens'}
               </Button>
               {claimDisabledReason && claimDisabledReason !== 'Cooldown active' ? <p className="text-sm text-secondary">{claimDisabledReason}</p> : null}
