@@ -229,7 +229,7 @@ export function FaucetDashboardSection({
             </Button>
             {transferError ? <p className="text-xs text-[#4B2E2B] dark:text-[#FED8B1]">{transferError}</p> : null}
             {transferHash ? (
-              <a href={`${explorerUrl}/tx/${transferHash}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-[#4B2E2B] hover:underline dark:text-[#FED8B1]">
+              <a href={`${explorerUrl}/tx/${transferHash}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-[#4B2E2B] hover:underline font-semibold text-primary">
                 View transfer transaction: {shortenAddress(transferHash, 10, 8)}
               </a>
             ) : null}
@@ -268,7 +268,7 @@ export function FaucetDashboardSection({
             </Button>
              {mintError ? <p className="text-xs text-[#4B2E2B] dark:text-[#FED8B1]">{mintError}</p> : null}
             {mintHash ? (
-              <a href={`${explorerUrl}/tx/${mintHash}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-[#4B2E2B] hover:underline dark:text-[#FED8B1]">
+              <a href={`${explorerUrl}/tx/${mintHash}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-[#4B2E2B] hover:underline font-semibold text-primary">
                 View mint transaction: {shortenAddress(mintHash, 10, 8)}
               </a>
             ) : null}
@@ -300,6 +300,8 @@ export function FaucetDashboardSection({
 
       <section className="mt-6">
         <Card>
+
+          
           <div className="mb-3 flex items-center justify-between">
             <h3 className="text-xl font-semibold font-semibold text-primary">Recent Transactions</h3>
             <p className="text-sm tfont-semibold text-primary">Live feed</p>
