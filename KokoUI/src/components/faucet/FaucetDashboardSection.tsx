@@ -123,30 +123,30 @@ export function FaucetDashboardSection({
   return (
     <section id="faucet-dashboard" className="mt-9">
       <div className="mb-4">
-        <p className="text-sm font-medium uppercase tracking-[0.16em] text-[#4B2E2B] dark:text-[#ECB176]">Dashboard</p>
-        <h2 className="mt-1 text-2xl font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">Main Faucet Dashboard</h2>
+        <p className="text-sm font-medium uppercase tracking-[0.16em] text-secondary">Dashboard</p>
+        <h2 className="mt-1 text-2xl font-semibold text-primary">Main Faucet Dashboard</h2>
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="xl:col-span-2">
           <Card>
-            <p className="text-xs uppercase tracking-[0.2em] text-[#4B2E2B] dark:text-[#ECB176]">Faucet Card</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-[#4B2E2B] dark:text-[#FED8B1]">
+            <p className="text-xs uppercase tracking-[0.2em] text-secondary">Faucet Card</p>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-primary">
               {faucetData?.tokenName ?? 'ERC20 Faucet'}
             </h3>
 
             <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border border-[#6F4E37]/45 bg-[#FFF7EF] px-4 py-3 dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]">
-                <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">Total Supply</p>
-                <p className="mt-1 text-lg font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">{faucetData?.totalSupplyFormatted ?? '--'} {faucetData?.tokenSymbol ?? ''}</p>
+              <div className="rounded-2xl border border-muted bg-card text-card-foreground px-4 py-3">
+                <p className="text-xs text-secondary">Total Supply</p>
+                <p className="mt-1 text-lg font-semibold text-primary">{faucetData?.totalSupplyFormatted ?? '--'} {faucetData?.tokenSymbol ?? ''}</p>
               </div>
-              <div className="rounded-2xl border border-[#6F4E37]/45 bg-[#FFF7EF] px-4 py-3 dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]">
-                <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">Claim Amount</p>
-                <p className="mt-1 text-lg font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">{faucetData?.claimAmountFormatted ?? '--'} {faucetData?.tokenSymbol ?? ''}</p>
+              <div className="rounded-2xl border border-muted bg-card text-card-foreground px-4 py-3">
+                <p className="text-xs text-secondary">Claimed Amount</p>
+                <p className="mt-1 text-lg font-semibold text-primary">{faucetData?.claimAmountFormatted ?? '--'} {faucetData?.tokenSymbol ?? ''}</p>
               </div>
-              <div className="rounded-2xl border border-[#6F4E37]/45 bg-[#FFF7EF] px-4 py-3 dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]">
-                <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">Your Balance</p>
-                <p className="mt-1 text-lg font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">{faucetData?.userBalanceFormatted ?? '--'} {faucetData?.tokenSymbol ?? ''}</p>
+              <div className="rounded-2xl border border-muted bg-card text-card-foreground px-4 py-3">
+                <p className="text-xs text-secondary">Your Balance</p>
+                <p className="mt-1 text-lg font-semibold text-primary">{faucetData?.userBalanceFormatted ?? '--'} {faucetData?.tokenSymbol ?? ''}</p>
               </div>
             </div>
 
@@ -154,7 +154,7 @@ export function FaucetDashboardSection({
               <Button type="submit" fullWidth variant="primary" isLoading={status === 'pending'} disabled={Boolean(claimDisabledReason)}>
                 {status === 'pending' ? 'Claiming...' : 'Claim Tokens'}
               </Button>
-              {claimDisabledReason && claimDisabledReason !== 'Cooldown active' ? <p className="text-sm text-[#4B2E2B] dark:text-[#ECB176]">{claimDisabledReason}</p> : null}
+              {claimDisabledReason && claimDisabledReason !== 'Cooldown active' ? <p className="text-sm text-secondary">{claimDisabledReason}</p> : null}
             </form>
           </Card>
 
@@ -162,7 +162,7 @@ export function FaucetDashboardSection({
             <Button
               type="button"
               variant="ghost"
-              className="border border-[#F08A42] bg-[#141414] px-4 py-2 text-[#F08A42] hover:bg-[#1F1F1F] dark:border-[#F08A42] dark:bg-[#141414] dark:text-[#F08A42] dark:hover:bg-[#1F1F1F]"
+              className="border border-accent bg-transparent px-4 py-2 text-accent hover:bg-accent-soft hover:text-white dark:border-accent dark:bg-transparent dark:text-accent dark:hover:bg-accent-soft dark:hover:text-white"
               isLoading={isAddingToken}
               onClick={onAddToken}
               disabled={!isConnected || isWrongNetwork || !hasValidContractAddress}
@@ -175,22 +175,22 @@ export function FaucetDashboardSection({
 
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={transition}>
           <Card>
-            <h3 className="text-lg font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">User Panel</h3>
+            <h3 className="text-lg font-semibold text-primary">User Panel</h3>
             <div className="mt-4 space-y-3">
-              <div className="rounded-xl border border-[#6F4E37]/45 bg-[#FFF7EF] p-3 dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]">
-                <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">Connected wallet</p>
-                <p className="mt-1 text-sm font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">{address ? shortenAddress(address, 8, 6) : 'Not connected'}</p>
+              <div className="rounded-xl border border-muted bg-card text-card-foreground p-3">
+                <p className="text-xs text-secondary">Connected wallet</p>
+                <p className="mt-1 text-sm font-semibold text-primary">{address ? shortenAddress(address, 8, 6) : 'Not connected'}</p>
               </div>
-              <div className="rounded-xl border border-[#6F4E37]/45 bg-[#FFF7EF] p-3 dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]">
-                <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">Claim eligibility</p>
-                <p className="mt-1 text-sm font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">{eligibilityText}</p>
+              <div className="rounded-xl border border-muted bg-card text-card-foreground p-3">
+                <p className="text-xs text-secondary">Claim eligibility</p>
+                <p className="mt-1 text-sm font-semibold text-primary">{eligibilityText}</p>
               </div>
-              <div className="rounded-xl border border-[#6F4E37]/45 bg-[#FFF7EF] p-3 dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]">
-                <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">Network</p>
-                <p className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-[#4B2E2B] dark:text-[#FED8B1]"><ShieldCheck className="h-4 w-4 text-[#4B2E2B]" /> {faucetData?.networkName ?? '--'}</p>
+              <div className="rounded-xl border border-muted bg-card text-card-foreground p-3">
+                <p className="text-xs text-secondary">Network</p>
+                <p className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-primary"><ShieldCheck className="h-4 w-4 text-secondary" /> {faucetData?.networkName ?? '--'}</p>
               </div>
-              <div className="rounded-xl border border-[#6F4E37]/45 bg-[#FFF7EF] p-3 dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]">
-                <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">Next claim countdown</p>
+              <div className="rounded-xl border border-muted bg-card text-card-foreground p-3">
+                <p className="text-xs text-secondary">Next claim countdown</p>
                 <CountdownDisplay totalSeconds={countdownSeconds} label="Next claim" />
               </div>
             </div>
@@ -201,7 +201,7 @@ export function FaucetDashboardSection({
       <section className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
           <form onSubmit={onTransfer} className="space-y-3">
-            <p className="text-sm font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">Transfer Tokens</p>
+            <p className="text-sm font-semibold text-[#4B2E2B] text-xl font-semibold text-primary">Transfer Tokens</p>
             <input
               type="text"
               className="input-base"
@@ -239,8 +239,7 @@ export function FaucetDashboardSection({
         <Card>
           <form onSubmit={onMint} className="space-y-3">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">Owner Mint</p>
-              <span className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">{isOwner ? 'Owner wallet' : 'Owner only'}</span>
+              <p className="text-sm font-semibold text-[#4B2E2B] text-xl font-semibold text-primary">Mint Tokens</p>
             </div>
             <input
               type="text"
@@ -261,25 +260,26 @@ export function FaucetDashboardSection({
             <Button
               type="submit"
               fullWidth
-              variant="primary"
+              variant="soft"
               isLoading={mintStatus === 'pending'}
               disabled={!isConnected || isWrongNetwork || !isOwner || !hasValidContractAddress}
             >
               {mintStatus === 'pending' ? 'Minting...' : 'Mint'}
             </Button>
-            {mintError ? <p className="text-xs text-[#4B2E2B] dark:text-[#FED8B1]">{mintError}</p> : null}
+             {mintError ? <p className="text-xs text-[#4B2E2B] dark:text-[#FED8B1]">{mintError}</p> : null}
             {mintHash ? (
               <a href={`${explorerUrl}/tx/${mintHash}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-[#4B2E2B] hover:underline dark:text-[#FED8B1]">
                 View mint transaction: {shortenAddress(mintHash, 10, 8)}
               </a>
             ) : null}
+
           </form>
         </Card>
       </section>
 
       <section className="mt-6">
         <div className="mb-3 flex items-center justify-between">
-          <h3 className="text-xl font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">Stats</h3>
+          <h3 className="text-xl font-semibold text-primary">Stats</h3>
           {isFetching ? <span className="rounded-full border border-[#6F4E37]/50 bg-[#FED8B1]/45 px-3 py-1 text-xs text-[#4B2E2B] dark:border-[#ECB176]/45 dark:bg-[#6F4E37]/50 dark:text-[#FED8B1]">Refreshing</span> : null}
         </div>
         {isLoading ? (
@@ -301,8 +301,8 @@ export function FaucetDashboardSection({
       <section className="mt-6">
         <Card>
           <div className="mb-3 flex items-center justify-between">
-            <h3 className="text-xl font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">Recent Transactions</h3>
-            <p className="text-sm text-[#4B2E2B] dark:text-[#ECB176]">Live feed</p>
+            <h3 className="text-xl font-semibold font-semibold text-primary">Recent Transactions</h3>
+            <p className="text-sm tfont-semibold text-primary">Live feed</p>
           </div>
           {isLoading ? (
             <div className="space-y-3">
@@ -322,9 +322,9 @@ export function FaucetDashboardSection({
         </Card>
       </section>
 
-      {isError ? <p className="mt-5 rounded-xl border border-[#6F4E37]/50 bg-[#FED8B1]/45 px-4 py-3 text-sm text-[#4B2E2B] dark:border-[#ECB176]/45 dark:bg-[#6F4E37]/55 dark:text-[#FED8B1]">{runtimeError}</p> : null}
-      {!hasValidContractAddress ? <p className="mt-5 rounded-xl border border-[#6F4E37]/50 bg-[#FED8B1]/45 px-4 py-3 text-sm text-[#4B2E2B] dark:border-[#ECB176]/45 dark:bg-[#6F4E37]/55 dark:text-[#FED8B1]">Set VITE_CONTRACT_ADDRESS (or CONTRACT_ADDRESS) to a valid contract value.</p> : null}
-      {!isConnected ? <p className="mt-5 rounded-xl border border-[#6F4E37]/45 bg-[#FFF7EF] px-4 py-3 text-sm text-[#4B2E2B] dark:border-[#ECB176]/40 dark:bg-[#3F2B1E] dark:text-[#ECB176]">Connect wallet to enable claiming and personalized metrics.</p> : null}
+      {isError ? <p className="mt-5 rounded-xl border border-muted bg-card text-card-foreground px-4 py-3 text-sm">{runtimeError}</p> : null}
+      {!hasValidContractAddress ? <p className="mt-5 rounded-xl border border-muted bg-card text-card-foreground px-4 py-3 text-sm">Set VITE_CONTRACT_ADDRESS (or CONTRACT_ADDRESS) to a valid contract value.</p> : null}
+      {!isConnected ? <p className="mt-5 rounded-xl border border-muted bg-card text-card-foreground px-4 py-3 text-sm">Connect wallet to enable claiming and personalized metrics.</p> : null}
     </section>
   )
 }

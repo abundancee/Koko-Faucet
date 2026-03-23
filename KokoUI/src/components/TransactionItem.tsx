@@ -16,29 +16,29 @@ export function TransactionItem({ item, explorerBaseUrl, tokenSymbol }: Transact
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
-      className="flex items-center justify-between gap-3 rounded-xl border border-[#6F4E37]/45 bg-[#FFF7EF] p-4 shadow-sm transition hover:border-[#A67B5B]/40 hover:shadow-md dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]"
+      className="flex items-center justify-between gap-3 rounded-xl border border-border-muted bg-bg-card p-4 shadow-sm transition-colors duration-300 hover:border-brand-accent/40 hover:shadow-md"
     >
       <div className="space-y-1">
         <div className="flex items-center gap-2">
-          <p className="text-sm font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">{shortenAddress(item.wallet)}</p>
+          <p className="text-sm font-semibold text-primary">{shortenAddress(item.wallet)}</p>
           <CopyButton value={item.wallet} />
           {item.type && (
-            <span className="ml-2 rounded bg-[#fed8b1]/60 px-2 py-0.5 text-xs font-bold uppercase text-[#6F4E37] dark:bg-[#6F4E37]/60 dark:text-[#FED8B1]">
+            <span className="ml-2 rounded bg-brand-secondary/60 px-2 py-0.5 text-xs font-bold uppercase text-brand-accent dark:bg-brand-accent/60 dark:text-brand-secondary">
               {item.type}
             </span>
           )}
         </div>
-        <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">{formatRelativeTime(item.timestamp)}</p>
+        <p className="text-xs text-secondary">{formatRelativeTime(item.timestamp)}</p>
       </div>
       <div className="text-right">
-        <p className="text-sm font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">
+        <p className="text-sm font-semibold text-primary">
           {item.amount} {tokenSymbol}
         </p>
         <a
           href={`${explorerBaseUrl}/tx/${item.hash}`}
           target="_blank"
           rel="noreferrer"
-          className="mt-1 inline-flex items-center gap-1 text-xs text-[#4B2E2B] transition hover:text-[#4B2E2B] dark:text-[#ECB176] dark:hover:text-[#FED8B1]"
+          className="mt-1 inline-flex items-center gap-1 text-xs text-secondary transition-colors duration-300 hover:text-brand-accent dark:hover:text-brand-secondary"
           title="Open in explorer"
         >
           {shortenAddress(item.hash, 10, 8)} <ExternalLink className="h-3 w-3" />

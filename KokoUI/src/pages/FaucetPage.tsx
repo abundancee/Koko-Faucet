@@ -1,6 +1,6 @@
 import { isAddress } from 'ethers'
 import type { FormEvent } from 'react'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useAccount, useChainId, useSwitchChain } from 'wagmi'
 import { FaucetDashboardSection } from '../components/faucet/FaucetDashboardSection'
@@ -25,10 +25,7 @@ export function FaucetPage() {
 	const [mintAmount, setMintAmount] = useState('')
 	const [isAddingToken, setIsAddingToken] = useState(false)
 
-	useEffect(() => {
-		document.documentElement.classList.add('dark')
-		document.documentElement.setAttribute('data-theme', 'dark')
-	}, [])
+	// Remove forced dark mode, theme is now controlled by TopNavbar
 
 	const {
 		data: faucetData,

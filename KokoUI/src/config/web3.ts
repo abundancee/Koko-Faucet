@@ -44,7 +44,7 @@ createAppKit({
     url: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173',
     icons: [],
   },
-  themeMode: 'dark',
+
 })
 
 export const wagmiConfig = wagmiAdapter.wagmiConfig

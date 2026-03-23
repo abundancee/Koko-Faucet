@@ -23,10 +23,10 @@ export function Button({
   const widthClassName = fullWidth ? 'w-full' : ''
   const variantClassName =
     variant === 'primary'
-      ? 'bg-gradient-to-r from-[#6F4E37] to-[#A67B5B] text-[#FFF7EF] shadow-lg shadow-[#6F4E37]/25 hover:translate-y-[-1px] hover:brightness-105'
+      ? 'bg-card-brown text-card-foreground-brown shadow-lg shadow-accent-soft/25 hover:translate-y-[-1px] hover:brightness-105'
       : variant === 'soft'
-        ? 'border border-[#6F4E37]/50 bg-[#FED8B1]/35 text-[#4B2E2B] shadow-sm hover:bg-[#FED8B1]/55 dark:border-[#ECB176]/40 dark:bg-[#6F4E37]/45 dark:text-[#FED8B1] dark:hover:bg-[#6F4E37]/60'
-        : 'text-[#4B2E2B] hover:bg-[#FED8B1]/40 dark:text-[#FED8B1] dark:hover:bg-[#6F4E37]/55'
+        ? 'border border-accent bg-card text-accent shadow-sm hover:bg-accent-soft hover:text-white dark:border-accent dark:bg-card-brown dark:text-card-foreground-brown dark:hover:bg-accent-soft dark:hover:text-white'
+        : 'text-accent hover:bg-accent-soft hover:text-white dark:text-card-foreground-brown dark:hover:bg-accent-soft dark:hover:text-white'
 
   const isDisabled = disabled || isLoading
 

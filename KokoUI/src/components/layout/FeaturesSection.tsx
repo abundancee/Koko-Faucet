@@ -28,8 +28,8 @@ export function FeaturesSection() {
   return (
     <section className="mt-8">
       <div className="mb-4">
-        <p className="text-sm font-medium uppercase tracking-[0.16em] text-[#4B2E2B] dark:text-[#ECB176]">Features</p>
-        <h2 className="mt-1 text-2xl font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">Built for modern web3 teams</h2>
+        <p className="text-sm font-medium uppercase tracking-[0.16em] text-secondary">Features</p>
+        <h2 className="mt-1 text-2xl font-semibold text-primary">Built for modern web3 teams</h2>
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         {features.map((item, index) => {
@@ -41,13 +41,13 @@ export function FeaturesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.25, delay: index * 0.05 }}
-              className="rounded-3xl border border-[#6F4E37]/45 bg-[#FFF7EF] p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]"
+              className="rounded-3xl border border-border-muted bg-bg-card p-5 shadow-sm transition-colors duration-300 hover:-translate-y-0.5 hover:shadow-md"
             >
-              <span className="inline-flex rounded-xl bg-[#FED8B1]/55 p-2 text-[#4B2E2B] dark:bg-[#6F4E37]/50 dark:text-[#FED8B1]">
+              <span className="inline-flex rounded-xl bg-brand-secondary/55 p-2 text-brand-accent dark:bg-brand-accent/50 dark:text-brand-secondary">
                 <Icon className="h-5 w-5" />
               </span>
-              <h3 className="mt-3 text-lg font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#4B2E2B] dark:text-[#ECB176]">{item.description}</p>
+              <h3 className="mt-3 text-lg font-semibold text-primary">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-secondary">{item.description}</p>
             </motion.article>
           )
         })}

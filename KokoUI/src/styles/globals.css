@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
+
+
 :root {
   color-scheme: dark;
   --app-bg: #1b140f;
@@ -9,13 +11,37 @@
   --text-secondary: #e3c8ad;
   --surface: rgba(60, 42, 30, 0.76);
   --surface-strong: #3f2b1e;
+  --card-bg: #3f2b1e;
+  --card-foreground: #f8e8d6;
   --border-soft: rgba(236, 177, 118, 0.28);
   --shadow-soft: 0 16px 46px rgba(8, 5, 3, 0.48);
   --brand-primary: #ecb176;
   --brand-secondary: #fed8b1;
   --brand-accent: #a67b5b;
   --brand-soft: rgba(236, 177, 118, 0.12);
+  transition: background-color 300ms ease, color 300ms ease;
 }
+
+.light {
+  color-scheme: light;
+  --app-bg: #f8f6f3;
+  --app-bg-muted: #ece8e3;
+  --text-primary: #2a1d15;
+  --text-secondary: #6f4e37;
+  --surface: rgba(255, 247, 239, 0.92);
+  --surface-strong: #fff7ef;
+  --card-bg: #fff;
+  --card-foreground: #2a1d15;
+  --border-soft: rgba(166, 123, 91, 0.18);
+  --shadow-soft: 0 16px 46px rgba(236, 177, 118, 0.10);
+  --brand-primary: #a67b5b;
+  --brand-secondary: #ecb176;
+  --brand-accent: #6f4e37;
+  --brand-soft: rgba(166, 123, 91, 0.10);
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+/* .dark block is not needed, handled by :root */
 
 body {
   min-height: 100vh;
@@ -42,13 +68,15 @@ h3 {
   min-height: 100vh;
 }
 
+
 .glass-card {
   border: 1px solid var(--border-soft);
   background: var(--surface);
   backdrop-filter: blur(14px);
   box-shadow: var(--shadow-soft);
-  transition: border-color 220ms ease, background-color 220ms ease;
+  transition: border-color 300ms ease, background-color 300ms ease;
 }
+
 
 .input-base {
   width: 100%;
@@ -59,27 +87,33 @@ h3 {
   color: var(--text-primary);
   font-size: 0.875rem;
   outline: none;
-  transition: border-color 0.2s ease, background-color 220ms ease;
+  transition: border-color 0.2s ease, background-color 300ms ease, color 300ms ease;
 }
+
 
 .input-base::placeholder {
   color: var(--text-secondary);
 }
 
+
 .input-base:focus {
-  border-color: rgba(166, 123, 91, 0.7);
+  border-color: var(--brand-accent);
 }
+
 
 .text-muted {
   font-size: 0.875rem;
   color: var(--text-secondary);
 }
 
+
 .countdown-pill {
   min-width: 2.3rem;
   border-radius: 0.75rem;
   border: 1px solid var(--border-soft);
-  background: var(--surface-strong);
+  background: var(--card-bg);
+  color: var(--card-foreground);
   padding: 0.2rem 0.45rem;
   text-align: center;
+  transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
 }

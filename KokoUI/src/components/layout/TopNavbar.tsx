@@ -1,5 +1,8 @@
+
 import { Button } from '../Button'
 import { WalletConnectButton } from '../WalletConnectButton'
+import { ThemeToggle } from './ThemeToggle'
+
 
 interface TopNavbarProps {
   isWrongNetwork: boolean
@@ -14,17 +17,20 @@ export function TopNavbar({
   isSwitchingNetwork,
   supportedChainName,
 }: TopNavbarProps) {
+
+
   return (
-    <nav className="glass-card mb-5 flex flex-wrap items-center justify-between gap-3 rounded-3xl px-5 py-4">
+    <nav className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-border-muted bg-bg-card px-5 py-4 shadow-md transition-colors duration-300">
       <div className="flex items-center gap-2">
-        <img src="/koko-logo.svg" alt="Koko logo" className="h-8 w-8 rounded-lg border border-[#6F4E37]/25 object-cover" />
+        <img src="/koko-logo.png" alt="Koko logo" className="h-8 w-8 rounded-lg border border-border-muted object-cover" />
         <div>
-          <p className="text-sm font-semibold text-[#4B2E2B] dark:text-[#FED8B1]">Koko Faucet</p>
-          <p className="text-xs text-[#4B2E2B] dark:text-[#ECB176]">Modern ERC20 Test Token Dashboard</p>
+          <p className="text-sm font-semibold text-brand-secondary">Koko Faucet</p>
+          <p className="text-xs text-brand-primary">An ERC20 Test Token Dashboard</p>
         </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
+        <ThemeToggle />
         {isWrongNetwork ? (
           <Button variant="ghost" onClick={onSwitchNetwork} isLoading={isSwitchingNetwork}>
             Switch to {supportedChainName}
@@ -33,5 +39,5 @@ export function TopNavbar({
         <WalletConnectButton />
       </div>
     </nav>
-  )
+  );
 }

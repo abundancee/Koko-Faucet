@@ -19,21 +19,21 @@ export function StatCard({ title, value, subtitle, icon: Icon, suffix = '', deci
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
-      className="rounded-2xl border border-[#6F4E37]/45 bg-[#FFF7EF] p-5 shadow-sm transition hover:shadow-md dark:border-[#ECB176]/40 dark:bg-[#3F2B1E]"
+      className="rounded-2xl border border-muted bg-card text-card-foreground p-5 shadow-sm transition hover:shadow-md"
     >
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-sm font-medium text-[#4B2E2B] dark:text-[#ECB176]">{title}</p>
-          <p className="mt-2 text-2xl font-semibold tracking-tight text-[#4B2E2B] dark:text-[#FED8B1]">
+          <p className="text-sm font-medium text-secondary">{title}</p>
+          <p className="mt-2 text-2xl font-semibold tracking-tight text-primary">
             {animatedValue.toLocaleString(undefined, {
               minimumFractionDigits: decimals,
               maximumFractionDigits: decimals,
             })}
             {suffix}
           </p>
-          <p className="mt-1 text-xs text-[#4B2E2B] dark:text-[#ECB176]">{subtitle}</p>
+          <p className="mt-1 text-xs text-secondary">{subtitle}</p>
         </div>
-        <span className="rounded-xl bg-[#FED8B1]/55 p-2.5 text-[#4B2E2B] dark:bg-[#6F4E37]/50 dark:text-[#FED8B1]">
+        <span className="rounded-xl bg-brand-secondary/55 p-2.5 text-brand-accent dark:bg-brand-accent/50 dark:text-brand-secondary">
           <Icon className="h-5 w-5" />
         </span>
       </div>
