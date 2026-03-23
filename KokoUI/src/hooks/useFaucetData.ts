@@ -6,7 +6,7 @@ import { getReadContract, getRpcProvider } from '../utils/ethers'
 import { appConfig, hasValidContractAddress } from '../utils/env'
 
 const RECENT_EVENT_WINDOW = 40000
-const RECENT_TRANSACTIONS_LIMIT = 8
+const RECENT_TRANSACTIONS_LIMIT = 20
 
 export function useFaucetData() {
   const { address } = useAccount()

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { Coins, Database, Droplets, ShieldCheck, Wallet } from 'lucide-react'
 import type { FormEvent } from 'react'
 import type { FaucetData, TxStatus } from '../../types/faucet'
@@ -119,6 +120,16 @@ export function FaucetDashboardSection({
         },
       ]
     : []
+
+  // Pagination state for recent transactions
+  const PAGE_SIZE = 5
+  const [txPage, setTxPage] = useState(0)
+  const totalTx = faucetData?.recentTransactions.length || 0
+  const totalPages = Math.ceil(totalTx / PAGE_SIZE)
+  const pagedTransactions = faucetData?.recentTransactions.slice(
+    txPage * PAGE_SIZE,
+    txPage * PAGE_SIZE + PAGE_SIZE
+  ) || []
 
   return (
     <section id="faucet-dashboard" className="mt-9">
@@ -310,12 +321,33 @@ export function FaucetDashboardSection({
               <Skeleton className="h-20" />
               <Skeleton className="h-20" />
             </div>
-          ) : faucetData?.recentTransactions.length ? (
-            <div className="flex flex-col gap-3">
-              {faucetData.recentTransactions.map((item) => (
-                <TransactionItem key={item.hash} item={item} explorerBaseUrl={faucetData.explorerBaseUrl} tokenSymbol={faucetData.tokenSymbol} />
-              ))}
-            </div>
+          ) : totalTx ? (
+            <>
+              <div className="flex flex-col gap-3">
+                {pagedTransactions.map((item) => (
+                  <TransactionItem key={item.hash} item={item} explorerBaseUrl={faucetData.explorerBaseUrl} tokenSymbol={faucetData.tokenSymbol} />
+                ))}
+              </div>
+              <div className="flex justify-center items-center gap-2 mt-4">
+                <button
+                  className="px-3 py-1 rounded border text-xs font-semibold disabled:opacity-50"
+                  onClick={() => setTxPage((p) => Math.max(0, p - 1))}
+                  disabled={txPage === 0}
+                >
+                  Previous
+                </button>
+                <span className="text-xs">
+                  Page {txPage + 1} of {totalPages}
+                </span>
+                <button
+                  className="px-3 py-1 rounded border text-xs font-semibold disabled:opacity-50"
+                  onClick={() => setTxPage((p) => Math.min(totalPages - 1, p + 1))}
+                  disabled={txPage >= totalPages - 1}
+                >
+                  Next
+                </button>
+              </div>
+            </>
           ) : (
             <p className="text-sm text-[#4B2E2B] dark:text-[#ECB176]">No claim transactions found in the scanned block range.</p>
           )}

@@ -58,7 +58,7 @@ npm run dev
 4. Claim tokens from the faucet card.
 5. Wait for cooldown before claiming again.
 6. Optionally transfer tokens from your wallet.
-7. If your wallet is the contract owner, use Owner Mint.
+7. If your wallet is the contract owner, use Mint Tokens.
 
 ## Token Details
 
